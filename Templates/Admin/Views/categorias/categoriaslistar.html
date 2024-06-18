@@ -1,0 +1,39 @@
+{% extends 'dashboard.html' %}
+
+{% block conteudo %}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0">
+      <h4 class="card-title">Home/Categorias</h4>
+      <hr>
+    </div>
+    <div class="mb-3">
+      <a href="{{url('admin/categorias/cadastrar')}}" class="btn btn-primary button-cadastrar-position">Criar nova categoria</a>
+    </div>
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for categoria in categorias %}
+                  <tr>
+                    <th scope="row">{{categoria.id}}</th>
+                    <td>{{categoria.titulo}}</td>
+                    {% if categoria.status == 1 %}
+                    <td><i class="fa-solid fa-circle" style="color: #4cd402;"></i></td>
+                    {% else %}
+                    <td><i class="fa-solid fa-circle" style="color: #c50a0a;"></i></td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<head>
+    <link href="/Templates/Site/Assets/Css/site.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div class="container my-5">
+        <br>
+        <div class="row">
+            <div class="col-lg-9 col-md-12">
+                <div class="row">
+                    {% for post in posts %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">{{post.titulo}}</h4>
+                                <p class="card-text">{{resumirTexto(post.texto, 160)}}</p>
+                                <a href="{{ url('post/'~post.id) }}" class="btn btn-primary">Leia mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-3">
+                {% include 'sidebar.html' %}
+            </div>
+        </div>
+        
+
+    </div>
+</body>
+
+{% endblock %}

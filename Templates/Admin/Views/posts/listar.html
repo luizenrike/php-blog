@@ -1,0 +1,49 @@
+{% extends 'dashboard.html' %}
+
+
+{% block conteudo %}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0">
+        <h3 class="card-title">Tópicos</h3>
+        <hr>
+    </div>
+    <div class="mb-3">
+      <a href="{{url('admin/posts/cadastrar')}}" class="btn btn-primary button-cadastrar-position">Criar novo tópico</a>
+    </div>
+    
+    <div class="card-body">
+      
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Status</th>
+                    <th scope ="col">Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for post in posts %}
+                  <tr>
+                    <th scope="row">{{post.id}}</th>
+                    <td>{{post.titulo}}</td>
+                    <td>{{post.categoria}}</td>
+                    {% if post.status == 1 %}
+                    <td><i class="fa-solid fa-circle" style="color: #4cd402;"></i></td>
+                    {% else %}
+                    <td><i class="fa-solid fa-circle" style="color: #c50a0a;"></i></td>
+                    {% endif %}
+                    <td>
+                      <a href="{{url('admin/post/editar/'~post.id)}}" class="fa-sharp fa-solid fa-pen icon-space" title="Editar"></a>
+                      <a href="{{url('admin/post/deletar/'~post.id)}}" class="fa-solid fa-trash icon" title="Excluir"></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

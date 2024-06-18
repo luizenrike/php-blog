@@ -1,0 +1,26 @@
+{
+    "name": "blog/php",
+    "description": "blog em php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Sistema\\": "Sistema/"
+        },
+        "files": [
+            "configuracao.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "luizenrik"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0",
+        "bissolli/validador-cpf-cnpj": "^1.2",
+        "pecee/simple-router": "dev-master",
+        "twig/twig": "^3.0"
+    
+    }
+}

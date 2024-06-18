@@ -1,0 +1,38 @@
+algumas funções dentro do twig template:
+
+
+{{'TEXTO'|lower}} => transforma o texto em minúsculo
+{{'texto'|upper}} => transforma o texto em maiúsculo
+{{'now'|date('m/d/Y')}} => 'now' captura a data atual do sistema, e a função date transforma a data conforme os parâmetros mês/dia/ano
+
+
+---BUSCA UTILIZANDO O PHP---
+
+1- instancia o metódo "method", nesse caso é o método POST
+2- informa a ação "action" que será tomada, nesse caso, estamos redirecionando para uma URL chamada "buscar"
+3- atribuimos um "name" no objeto que queremos capturar, nesse caso atribuimos "name='busca'"
+
+       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post" action="{{url('buscar')}}">
+          <div class="input-group">
+            <input type="search" class="form-control form-control-dark text-bg-white" name="busca"
+              placeholder="Buscar..." aria-label="Search">
+            <button type="submit" class="btn btn-warning">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+4- no PHP, temos a function busca, responsável por recuperar o que foi digitado no campo "busca" do <input>, tratar, buscar os dados e renderizar a view
+
+public function buscar() : void{
+        $dadosBusca = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $postService = new PostModelo();
+        if(isset($dadosBusca)){
+            $dados = $postService->getByBuscar($dadosBusca['busca']);
+        }
+        
+        echo $this->template->renderizar('busca.html', [
+            'titulo' => 'Buscar',
+            'posts' => $dados,
+            'categorias' => $this->GetCategorias()
+        ]);
+}

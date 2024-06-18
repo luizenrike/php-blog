@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<body>
+
+    <div class="container my-5">
+
+        <div class="row">
+            <div class="col-lg-9 col-md-12">
+                {% if posts %}
+                <div class="row">
+                    {% for post in posts %}
+                    <div class="col-lg-6 col-md-9 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h4 class="card-title">{{post.titulo}}</h4>
+                                <p class="card-text">{{resumirTexto(post.texto, 160)}}</p>
+                                <a href="{{ url('post/'~post.id) }}" class="btn btn-primary">Leia mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Sua busca não retornou resultados, por favor, tente com outra palavra.
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-3">
+                {% include 'sidebar.html' %}
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+
+{% endblock %}
